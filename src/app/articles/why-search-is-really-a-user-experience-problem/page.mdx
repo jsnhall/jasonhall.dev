@@ -1,0 +1,105 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Jason Hall',
+  date: '2026-06-14',
+  title: 'Why Search Is Really a User Experience Problem',
+  description:
+    'Search succeeds when people can complete the task they came to solve, not just when the engine returns matching documents.',
+  category: 'Experience',
+  tags: ['Search', 'User Experience', 'Information Architecture'],
+  status: 'published',
+  featured: true,
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+When people talk about enterprise search, the conversation usually turns technical very quickly.
+Indexes. Relevance scoring. Synonyms. Filters. Search providers. Performance.
+
+All of those things matter, but after spending years building and maintaining search experiences, I have come to believe that many search problems are not technical problems at all.
+They are user experience problems.
+
+## The Assumption
+
+Organizations often assume that if they can make content searchable, people will find what they need.
+
+Unfortunately, that is rarely how it works.
+
+Most users do not understand the structure of the content they are searching.
+They do not know which department owns it, what terminology was used when it was created, or even whether the information exists in the first place.
+
+What they do know is the outcome they are trying to achieve.
+
+They are not searching for content.
+They are trying to solve a problem.
+
+## Search Starts Before the Search Box
+
+One of the most common mistakes in enterprise search is focusing exclusively on the search results page.
+
+By the time a user reaches the results page, several things have already happened:
+
+- They formed a mental model of what they are looking for.
+- They decided on a search term.
+- They made assumptions about where information should live.
+- They developed expectations about what the results should contain.
+
+If those assumptions do not align with reality, even a technically successful search can feel like a failure.
+A search experience can return the correct result and still leave the user frustrated.
+
+## Information Architecture Matters More Than People Think
+
+Good search begins with good information architecture.
+
+Content that is poorly organized, inconsistently labeled, or difficult to maintain creates problems that no search engine can fully solve.
+Search engines are excellent at finding content.
+They are not particularly good at fixing content governance issues.
+
+The quality of search results is often a reflection of the quality of the underlying content model.
+When content authors struggle to categorize information correctly, users eventually struggle to find it.
+
+## Discoverability Is Bigger Than Search
+
+Search is only one form of discoverability.
+
+Navigation, content relationships, recommendations, related content, filters, and even page layout all influence whether users can successfully find information.
+
+In many cases, improving discoverability has a greater impact than improving search.
+If users can naturally navigate to information without searching, everyone wins.
+
+The best search experience is often the one users never need to use.
+
+## Measure Success Differently
+
+Organizations frequently measure search success through technical metrics:
+
+- Query volume
+- Response time
+- Result counts
+- Index coverage
+
+While useful, those metrics do not tell the whole story.
+
+A more important question is:
+
+Did the user accomplish what they were trying to accomplish?
+
+A fast search that produces confusing results is not successful.
+A slower search that helps users complete a task often is.
+
+Ultimately, search exists to help people achieve outcomes, not to satisfy technical requirements.
+
+## Final Thoughts
+
+Search sits at the intersection of content, technology, and user experience.
+Strong search experiences require good content architecture, thoughtful information design, and an understanding of user behavior.
+Technology plays an important role, but it is only one piece of the puzzle.
+
+The next time a search experience is not meeting expectations, it may be worth looking beyond the search engine itself.
+The real problem might not be search at all.

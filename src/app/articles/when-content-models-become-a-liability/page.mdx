@@ -1,0 +1,118 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Jason Hall',
+  date: '2026-06-13',
+  title: 'When Content Models Become a Liability',
+  description:
+    'Content models should create clarity for authors and teams. When they become too abstract or overbuilt, they start working against the platform.',
+  category: 'Content',
+  tags: ['Content Architecture', 'Content Modeling', 'AEM'],
+  status: 'published',
+  featured: true,
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+Content models are one of the most important parts of any content platform.
+They define structure, establish consistency, and create a foundation that allows content to be reused across channels and experiences.
+
+When designed well, content models can make a platform more flexible, more scalable, and easier to maintain.
+When designed poorly, they become a liability.
+
+## The Temptation to Model Everything
+
+One of the most common mistakes in content architecture is trying to account for every possible future scenario.
+
+The thinking usually sounds reasonable:
+
+- What if we need this field later?
+- What if another team wants to reuse this content?
+- What if requirements change?
+- What if we need additional metadata?
+
+Before long, a simple content model becomes a complex collection of fields, references, options, and relationships.
+
+The model appears flexible on paper.
+In practice, it often becomes difficult to understand, difficult to author, and difficult to maintain.
+
+## Complexity Has a Cost
+
+Every field introduces a decision.
+Every decision increases cognitive load.
+
+Content authors rarely think about content models the same way architects and developers do.
+Their goal is not to admire a perfectly normalized data structure.
+Their goal is to create and publish content efficiently.
+
+A model that requires authors to fill out dozens of fields, manage multiple references, and understand complex relationships may technically support every use case, but it often slows down the people responsible for maintaining it.
+
+Good content architecture is not just about structure.
+It is about usability.
+
+## Flexibility vs. Governance
+
+Content architecture is often a balancing act between flexibility and governance.
+
+Too much flexibility creates inconsistency.
+Too much governance creates friction.
+
+Finding the right balance requires understanding how content is actually created and maintained.
+A model that looks elegant in a diagram may fail completely when real authors begin using it.
+
+The best content models are often simpler than expected because they prioritize common use cases instead of edge cases.
+
+## Designing for Change
+
+One lesson I have learned is that change is inevitable.
+
+Business requirements evolve.
+Teams reorganize.
+New channels emerge.
+Technology changes.
+
+Content models should anticipate change without becoming bloated.
+Rather than trying to predict every future requirement, it is often better to create models that can evolve over time.
+
+This requires restraint.
+Not every possibility needs to be solved on day one.
+
+## Content Models Are Product Design
+
+Developers often think of content models as technical artifacts.
+In reality, they are products.
+
+Authors interact with them every day.
+Editors depend on them.
+Business stakeholders rely on them.
+
+The experience of creating content is just as important as the experience of consuming it.
+A well-designed model makes content creation feel intuitive.
+A poorly designed model turns every update into a frustrating process.
+
+## Questions Worth Asking
+
+When reviewing a content model, I often find these questions helpful:
+
+- Does every field have a clear purpose?
+- Will authors understand what belongs in each field?
+- Is this solving a real requirement or a hypothetical one?
+- Can the model evolve without major disruption?
+- Does the authoring experience remain simple?
+
+If the answer to any of those questions is unclear, the model may need another iteration.
+
+## Final Thoughts
+
+Content models should create clarity, not complexity.
+
+The goal is not to design the most flexible structure possible.
+The goal is to create a system that helps people manage content effectively while remaining adaptable to future needs.
+
+Good content architecture often comes from knowing what not to model.
+Sometimes the most valuable field is the one you never add.

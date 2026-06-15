@@ -5,17 +5,32 @@ import { Layout } from '@/components/Layout'
 
 import '@/styles/tailwind.css'
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
+const siteDescription =
+  'Practical writing on content architecture, user experience, software architecture, AEM, and AI-assisted development.'
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    template: '%s - Spencer Sharp',
-    default:
-      'Spencer Sharp - Software designer, founder, and amateur astronaut',
+    template: '%s - Jason Hall',
+    default: 'Jason Hall - Building better digital experiences',
   },
-  description:
-    'I’m Spencer, a software designer and entrepreneur based in New York City. I’m the founder and CEO of Planetaria, where we develop technologies that empower regular people to explore space on their own terms.',
+  description: siteDescription,
+  openGraph: {
+    title: 'Jason Hall - Building better digital experiences',
+    description: siteDescription,
+    url: siteUrl,
+    siteName: 'jasonhall.dev',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Jason Hall - Building better digital experiences',
+    description: siteDescription,
+  },
   alternates: {
     types: {
-      'application/rss+xml': `${process.env.NEXT_PUBLIC_SITE_URL}/feed.xml`,
+      'application/rss+xml': `${siteUrl}/feed.xml`,
     },
   },
 }
