@@ -45,8 +45,8 @@ export default async function ArticlesIndex() {
 
   return (
     <SimpleLayout
-      title="Writing on content, experience, architecture, and AI."
-      intro="A collection of practical articles, lessons learned, and observations from building digital experiences."
+      title="Writing about the work behind digital experiences."
+      intro="Articles and ideas from real-world projects and ongoing exploration."
     >
       <div className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
         <div className="flex max-w-3xl flex-col space-y-16">

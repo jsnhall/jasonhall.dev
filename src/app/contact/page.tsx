@@ -7,22 +7,22 @@ const contactLinks = [
   {
     label: 'LinkedIn',
     href: 'https://www.linkedin.com/in/jsnhall/',
-    description: 'The best place to connect professionally.',
+    description: 'Professional profile and career history.',
   },
   {
     label: 'GitHub',
     href: 'https://github.com/jsnhall',
-    description: 'Code, experiments, and public project work.',
+    description: 'Side projects, experiments, and public code.',
   },
   {
     label: 'Instagram',
     href: 'https://www.instagram.com/jsnhall',
-    description: 'A lighter look at life outside the work.',
+    description: 'Life outside of work.',
   },
   {
     label: 'Email',
     href: 'mailto:azjasonhall@gmail.com',
-    description: 'For direct notes, project conversations, or follow-up.',
+    description: 'The best way to reach me directly.',
   },
 ]
 
@@ -35,8 +35,8 @@ export const metadata: Metadata = {
 export default function Contact() {
   return (
     <SimpleLayout
-      title="Contact"
-      intro="The best way to reach me is through LinkedIn or email. You can also find public project work on GitHub."
+      title="Connect with me."
+      intro="The best way to reach me is by email. You can also connect with me on LinkedIn or explore side projects and experiments on GitHub."
     >
       <div className="grid max-w-3xl grid-cols-1 gap-8 sm:grid-cols-2">
         {contactLinks.map((link) => (
