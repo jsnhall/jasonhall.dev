@@ -13,34 +13,34 @@ import { formatDate } from '@/lib/formatDate'
 
 const featuredTopics = [
   {
-    title: 'Content',
+    title: 'Digital Experiences',
     description:
-      'Content architecture, Adobe Experience Manager, content modeling, governance, and publishing workflows.',
+      'Designing solutions that balance user needs, business goals, and technology.',
   },
   {
-    title: 'Experience',
+    title: 'Content and Platforms',
     description:
-      'User experience, information architecture, accessibility, design systems, and discoverability.',
+      'Adobe Experience Manager, content modeling, content delivery, and enterprise web applications.',
   },
   {
-    title: 'Architecture',
+    title: 'Software and Architecture',
     description:
-      'Software design, integration patterns, maintainability, and practical platform decisions.',
+      'Application design, integrations, maintainability, and technical decision-making.',
   },
   {
-    title: 'AI',
+    title: 'Emerging Technology',
     description:
-      'Practical applications of agentic engineering, automation, and emerging technology.',
+      'AI, automation, and the tools changing how software is designed and built.',
   },
 ]
 
 const currentInterests = [
-  'Solution Architecture',
+  'Content Modeling',
   'Design Systems',
   'User Experience',
-  'Agentic Engineering',
-  'Enterprise Content Management',
-  'AI',
+  'AI-Assisted Development',
+  'Agentic Systems',
+  'Digital Experience Architecture'
 ]
 
 function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -101,7 +101,7 @@ export default async function Home() {
             Bridging user needs, business goals, and technology.
           </p>
           <p className="mt-4 text-base text-zinc-600 dark:text-zinc-400">
-            I&apos;m an AEM Developer focused on enterprise content platforms and digital experiences. Here I share ideas and lessons learned from content architecture, user experience, software design, and the evolving role of AI in modern development.
+            I'm an AEM Developer focused on content platforms and digital experiences. I write about designing solutions, building experiences, and connecting business needs with technology.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href="/articles">Read the Articles</Button>
@@ -121,7 +121,7 @@ export default async function Home() {
                   Recent Writing
                 </h2>
                 <p className="mt-4 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">
-                  Practical observations from content platforms, user experience, architecture, and agentic engineering.
+                  Articles and ideas from real-world projects and ongoing exploration.
                 </p>
               </div>
             </div>
@@ -157,10 +157,11 @@ export default async function Home() {
                 About
               </h2>
               <p className="mt-4 text-sm text-zinc-600 dark:text-zinc-400">
-                I build and maintain enterprise content experiences with an eye
-                toward author usability, long-term maintainability, and the
-                messy reality of how teams actually work.
+                I'm an AEM Developer, husband, father of two boys, and avid runner based in Arizona.
               </p>
+              <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+                Professionally, I focus on enterprise content platforms and digital experiences. Outside of work, you'll usually find me spending time with family, training for an ultra marathon, or exploring new ideas in technology.
+              </p>    
               <div className="mt-4">
                 <Button href="/about" variant="secondary">
                   More About Me

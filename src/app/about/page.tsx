@@ -9,14 +9,6 @@ import {
   LinkedInIcon,
 } from '@/components/SocialIcons'
 
-const focusAreas = [
-  'AEM and enterprise content platforms',
-  'Content architecture and governance',
-  'User experience and discoverability',
-  'Design systems and component contracts',
-  'AI-assisted development workflows',
-]
-
 function SocialLink({
   className,
   href,
@@ -70,46 +62,23 @@ export default function About() {
               className="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
             />
           </div>
-          <div className="mt-10 rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
-            <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-              Focus areas
-            </h2>
-            <ul className="mt-5 space-y-3 text-sm text-zinc-600 dark:text-zinc-400">
-              {focusAreas.map((area) => (
-                <li key={area}>{area}</li>
-              ))}
-            </ul>
-          </div>
         </div>
         <div className="lg:order-first lg:row-span-2">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-            I&apos;m Jason Hall. I build digital experiences through content,
-            architecture, and user experience.
+            Hi, I&apos;m Jason.
           </h1>
           <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
             <p>
-              I work with enterprise content platforms, especially AEM, where
-              small decisions about content models, authoring workflows, and
-              component contracts can shape the quality of an experience for
-              years.
+              I work with enterprise content platforms, especially AEM, where small decisions about content models, authoring experiences, and component design can shape the quality of a digital experience for years.
             </p>
             <p>
-              My work sits at the intersection of content architecture, user
-              experience, design systems, and software architecture. I care
-              about making systems that are clear enough for teams to maintain
-              and useful enough for people to actually rely on.
+              My work sits at the intersection of content platforms, user experience, software architecture, and solution design. I enjoy solving problems that require balancing user needs, business goals, and technical constraints.
             </p>
             <p>
-              I am also exploring how AI-assisted development changes the way
-              teams plan, build, review, and document digital products. The
-              useful parts are rarely the flashy demos. The useful parts are the
-              places where friction disappears and better decisions get easier
-              to make.
+              More recently, I've become interested in how AI-assisted development is changing the way teams plan, build, review, and document software. The most valuable applications are rarely the flashy demos. They're the moments where friction disappears, workflows improve, and better decisions become easier to make.
             </p>
             <p>
-              Outside of work, I am a husband, father of two boys, and runner.
-              This site is where I collect practical lessons from the projects,
-              tools, and ideas I keep coming back to.
+              Outside of work, I'm a husband, father of two boys, and runner based in Arizona. Much of my time is spent balancing family, training for endurance events, and staying curious about the technologies shaping the future.
             </p>
           </div>
         </div>
