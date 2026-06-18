@@ -1,4 +1,4 @@
-import { type Metadata } from 'next'
+import { type Metadata, type Viewport } from 'next'
 
 import { Providers } from '@/app/providers'
 import { Layout } from '@/components/Layout'
@@ -11,6 +11,7 @@ const siteDescription =
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  manifest: '/manifest.webmanifest',
   title: {
     template: '%s - Jason Hall',
     default: 'Jason Hall | Digital Experiences, Content Platforms, and Technology',
@@ -28,11 +29,23 @@ export const metadata: Metadata = {
     title: 'Jason Hall | Digital Experiences, Content Platforms, and Technology',
     description: siteDescription,
   },
+  appleWebApp: {
+    capable: true,
+    title: 'Jason Hall',
+    statusBarStyle: 'black-translucent',
+  },
   alternates: {
     types: {
       'application/rss+xml': `${siteUrl}/feed.xml`,
     },
   },
+}
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#fafafa' },
+    { media: '(prefers-color-scheme: dark)', color: '#18181b' },
+  ],
 }
 
 export default function RootLayout({
