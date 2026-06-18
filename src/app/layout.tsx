@@ -7,17 +7,17 @@ import '@/styles/tailwind.css'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
 const siteDescription =
-  'Practical writing on content architecture, user experience, software architecture, AEM, and AI-assisted development.'
+  'Jason Hall writes about designing solutions, building digital experiences, and connecting business needs with technology. Topics include content platforms, software architecture, user experience, and emerging technology.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     template: '%s - Jason Hall',
-    default: 'Jason Hall - Building better digital experiences',
+    default: 'Jason Hall | Digital Experiences, Content Platforms, and Technology',
   },
   description: siteDescription,
   openGraph: {
-    title: 'Jason Hall - Building better digital experiences',
+    title: 'Jason Hall | Digital Experiences, Content Platforms, and Technology',
     description: siteDescription,
     url: siteUrl,
     siteName: 'jasonhall.dev',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary',
-    title: 'Jason Hall - Building better digital experiences',
+    title: 'Jason Hall | Digital Experiences, Content Platforms, and Technology',
     description: siteDescription,
   },
   alternates: {
@@ -42,7 +42,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
-      <body className="flex h-full bg-zinc-50 dark:bg-black">
+      <body
+        className="flex h-full bg-zinc-50 dark:bg-black"
+        suppressHydrationWarning
+      >
         <Providers>
           <div className="flex w-full">
             <Layout>{children}</Layout>

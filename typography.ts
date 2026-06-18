@@ -56,7 +56,7 @@ export default {
           '--tw-prose-invert-underline': theme('colors.teal.400 / 0.3'),
           '--tw-prose-invert-underline-hover': theme('colors.teal.400'),
           '--tw-prose-invert-bold': theme('colors.zinc.200'),
-          '--tw-prose-invert-counters': theme('colors.zinc.200'),
+          '--tw-prose-invert-counters': theme('cFolors.zinc.200'),
           '--tw-prose-invert-bullets': theme('colors.zinc.200'),
           '--tw-prose-invert-hr': theme('colors.zinc.700 / 0.4'),
           '--tw-prose-invert-quote-borders': theme('colors.zinc.500'),
@@ -73,12 +73,12 @@ export default {
           color: 'var(--tw-prose-body)',
           lineHeight: theme('lineHeight.7'),
           '> *': {
-            marginTop: theme('spacing.10'),
-            marginBottom: theme('spacing.10'),
+            marginTop: theme('spacing.5'),
+            marginBottom: theme('spacing.5'),
           },
           p: {
-            marginTop: theme('spacing.7'),
-            marginBottom: theme('spacing.7'),
+            marginTop: theme('spacing.5'),
+            marginBottom: theme('spacing.5'),
           },
 
           // Headings
@@ -89,13 +89,13 @@ export default {
           h2: {
             fontSize: theme('fontSize.xl')[0],
             lineHeight: theme('lineHeight.7'),
-            marginTop: theme('spacing.20'),
+            marginTop: theme('spacing.10'),
             marginBottom: theme('spacing.4'),
           },
           h3: {
             fontSize: theme('fontSize.base')[0],
             lineHeight: theme('lineHeight.7'),
-            marginTop: theme('spacing.16'),
+            marginTop: theme('spacing.6'),
             marginBottom: theme('spacing.4'),
           },
           ':is(h2, h3) + *': {
@@ -172,8 +172,8 @@ export default {
             paddingLeft: theme('spacing.6'),
           },
           li: {
-            marginTop: theme('spacing.6'),
-            marginBottom: theme('spacing.6'),
+            marginTop: theme('spacing.1'),
+            marginBottom: theme('spacing.1'),
             paddingLeft: theme('spacing[3.5]'),
           },
           'li::marker': {
@@ -206,6 +206,11 @@ export default {
             overflowX: 'auto',
             border: '1px solid',
             borderColor: 'var(--tw-prose-pre-border)',
+            marginTop: theme('spacing.10'),
+            marginBottom: theme('spacing.10'),
+          },
+           ':is(pre) code': {
+             fontSize: 'inherit',
           },
           'pre code': {
             display: 'inline',

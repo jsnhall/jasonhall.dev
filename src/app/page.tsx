@@ -101,7 +101,7 @@ export default async function Home() {
             Bridging user needs, business goals, and technology.
           </p>
           <p className="mt-4 text-base text-zinc-600 dark:text-zinc-400">
-            I'm an AEM Developer focused on content platforms and digital experiences. I write about designing solutions, building experiences, and connecting business needs with technology.
+            I&apos;m an AEM Developer focused on content platforms and digital experiences. I write about designing solutions, building experiences, and connecting business needs with technology.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href="/articles">Read the Articles</Button>
@@ -157,10 +157,10 @@ export default async function Home() {
                 About
               </h2>
               <p className="mt-4 text-sm text-zinc-600 dark:text-zinc-400">
-                I'm an AEM Developer, husband, father of two boys, and avid runner based in Arizona.
+                I&apos;m an AEM Developer, husband, father of two boys, and avid runner based in Arizona.
               </p>
               <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-                Professionally, I focus on enterprise content platforms and digital experiences. Outside of work, you'll usually find me spending time with family, training for an ultra marathon, or exploring new ideas in technology.
+                Professionally, I focus on enterprise content platforms and digital experiences. Outside of work, you&apos;ll usually find me spending time with family, training for an ultra marathon, or exploring new ideas in technology.
               </p>    
               <div className="mt-4">
                 <Button href="/about" variant="secondary">

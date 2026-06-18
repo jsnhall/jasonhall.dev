@@ -75,10 +75,10 @@ export default function About() {
               My work sits at the intersection of content platforms, user experience, software architecture, and solution design. I enjoy solving problems that require balancing user needs, business goals, and technical constraints.
             </p>
             <p>
-              More recently, I've become interested in how AI-assisted development is changing the way teams plan, build, review, and document software. The most valuable applications are rarely the flashy demos. They're the moments where friction disappears, workflows improve, and better decisions become easier to make.
+              More recently, I&apos;ve become interested in how AI-assisted development is changing the way teams plan, build, review, and document software. The most valuable applications are rarely the flashy demos. They&apos;re the moments where friction disappears, workflows improve, and better decisions become easier to make.
             </p>
             <p>
-              Outside of work, I'm a husband, father of two boys, and runner based in Arizona. Much of my time is spent balancing family, training for endurance events, and staying curious about the technologies shaping the future.
+              Outside of work, I&apos;m a husband, father of two boys, and runner based in Arizona. Much of my time is spent balancing family, training for endurance events, and staying curious about the technologies shaping the future.
             </p>
           </div>
         </div>
