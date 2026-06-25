@@ -1,0 +1,112 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Jason Hall',
+  date: '2026-06-24',
+  title: 'Should Every AI-Generated Feature Start With a Specification?',
+  description:
+    'Specification-driven development can make AI-assisted work more predictable, but the process has a cost. The question is when that cost is worth paying.',
+  category: 'AI',
+  tags: ['AI', 'Software Engineering', 'Specifications', 'Developer Workflow'],
+  status: 'published',
+  featured: false,
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+Over the past few weeks, I've been experimenting with GitHub Spec Kit as part of my AI-assisted development workflow.
+
+On paper, the idea is compelling.
+
+Instead of asking an AI agent to immediately write code, you first define the problem. The agent generates a specification, creates an implementation plan, analyzes the design for gaps, and only then begins building the feature.
+
+It is a structured approach that promises more predictable results.
+
+My first thought was simple.
+
+> Why wouldn't we do this for every feature?
+
+The more I worked with it, the more I started questioning that assumption.
+
+## Planning Is Not Free
+
+One thing that often gets overlooked in conversations about AI-assisted development is that planning has a cost.
+
+Every specification generated.
+
+Every implementation plan.
+
+Every analysis pass.
+
+All of it consumes model reasoning, developer review time, and, in many organizations, AI credits.
+
+That doesn't make planning a bad investment.
+
+It just means the planning should create more value than it costs.
+
+For a feature that introduces a new architectural pattern, spans multiple teams, or carries significant business risk, that investment is probably worthwhile.
+
+For a small enhancement to an existing component, the answer becomes less obvious.
+
+The more I thought about it, the more I started wondering if every feature really deserves the same amount of process.
+
+## The Storybook Question
+
+Another thought kept coming back to me while experimenting with Spec Kit.
+
+It reminded me of Storybook.
+
+When a team first adopts Storybook, the documentation is usually excellent. Components are documented, examples are complete, and everything stays in sync.
+
+Until it doesn't.
+
+The application evolves.
+
+Features get added.
+
+Requirements change.
+
+Eventually, someone forgets to update the stories. Then someone else does the same. Before long, Storybook no longer reflects the application developers are actually building.
+
+I wonder if specifications face the same challenge.
+
+Creating a specification is only part of the process.
+
+Maintaining it is the harder problem.
+
+If future enhancements don't update the specification, it slowly becomes historical documentation instead of a living source of truth.
+
+Eventually, developers stop trusting it.
+
+That isn't a problem unique to Spec Kit.
+
+It's a challenge every form of documentation eventually faces.
+
+## Maybe Not Every Feature Needs the Same Process
+
+One realization I've had is that we often think about AI tooling as something that should be applied uniformly.
+
+Either we use specification-driven development.
+
+Or we don't.
+
+In reality, different features probably deserve different levels of planning.
+
+A new platform capability that affects multiple teams may benefit enormously from a detailed specification, implementation plan, and design analysis.
+
+A small enhancement to an existing component may not.
+
+The process should probably scale with the complexity, risk, and longevity of the work.
+
+## Where I Am Landing
+
+I'm still experimenting with where specification-driven development fits into my workflow, and I expect my thinking will evolve as I use it on larger and more complex projects.
+
+For now, the biggest lesson isn't that every feature needs a specification.
+
+It's that AI-assisted development introduces a new engineering decision. Not just how we build software, but how much planning is worth doing before we ask an agent to build it.
