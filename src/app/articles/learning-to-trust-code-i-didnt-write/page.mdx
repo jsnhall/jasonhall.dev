@@ -1,0 +1,150 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Jason Hall',
+  date: '2026-07-07',
+  title: "Learning to Trust Code I Didn't Write",
+  description:
+    'AI-assisted development is changing what it means to own code, shifting the work from typing implementations to understanding when generated code is worth trusting.',
+  category: 'AI',
+  tags: ['AI', 'Software Engineering', 'Developer Workflow', 'Code Review'],
+  status: 'published',
+  featured: false,
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+I've been using AI to write code for a while now.
+
+This wasn't my first pull request containing generated code. It wasn't even the first feature where an agent had done most of the implementation. Like many developers, I'd gradually incorporated AI into my workflow over the past year.
+
+Somewhere along the way, generating code stopped feeling novel. It simply became part of how I worked.
+
+But a few days ago, something changed.
+
+It wasn't a new model or a breakthrough feature. It was an enhancement to something I had originally architected and built. Another team wanted to use it, so I needed to expand the feature to support a new use case.
+
+Instead of implementing it myself, I ran it through plan mode, reviewed the proposed approach, and let the agent build the solution.
+
+The first implementation wasn't perfect. I found bugs, asked the agent to investigate them, reviewed its proposed fixes, and repeated that process several times until I was satisfied with the result.
+
+The enhancement was completed significantly faster than if I had written it myself. The feature worked, the architecture still made sense, the edge cases were covered, and by every reasonable measure, it was a success.
+
+I should have closed my laptop feeling great.
+
+Instead, I found myself staring at the pull request wondering why something felt... different.
+
+It wasn't the code.
+
+It was my relationship to it.
+
+## Letting Go
+
+What made this experience different wasn't that AI had written the implementation.
+
+It was that I had let go of something I originally created.
+
+For years, whenever this feature needed to evolve, I was the one making every implementation decision. I knew every corner of it because I'd built it. If someone asked why a piece of code existed, I usually had an answer because I remembered the conversation, the constraint, or the failed approach that led me there.
+
+This time, I wasn't making every decision. I was supervising someone, or something, that was.
+
+That realization caught me off guard. Not because the agent was incapable, but because I was learning to trust it with something I had always trusted myself to do.
+
+## What Does It Mean to Own Code?
+
+Looking at that pull request brought back questions I'd been wrestling with for a while.
+
+Every now and then I'd catch myself wondering what it really meant to put my name on code I didn't personally write. If someone commented on the pull request and asked why a particular section was implemented the way it was, what was my responsibility? Should I be able to explain every line, or was it enough that I'd reviewed the implementation, tested it, and agreed it was the right solution?
+
+This wasn't the first time I'd asked myself those questions.
+
+It was the first time they felt real.
+
+Part of me still believes the answer is yes. If my name is on the pull request, I should understand every line.
+
+Another part of me wonders if that's a standard I've never actually held myself to.
+
+Could I explain every line of every framework I depend on? Every open source library? Every feature I wrote six months ago without rereading it first?
+
+Probably not.
+
+So why does generated code feel different?
+
+Maybe ownership isn't about producing every line. Maybe it's about understanding the implementation well enough to stand behind it.
+
+I don't know.
+
+I'm still trying to figure that out.
+
+## Reading Has Become the Work
+
+One thing I've realized is that reading generated code is mentally different from reading my own.
+
+When I revisit something I wrote, I'm not just reading code. I'm remembering the ideas that didn't work, the tradeoffs I made, the conversations that shaped the solution, and the bugs I avoided. That context makes understanding almost effortless.
+
+Generated code doesn't come with any of that history. Every implementation feels a little like joining an unfamiliar project, and before I can evaluate whether it's good, I first have to understand how the agent approached the problem.
+
+For a while, I assumed I was thinking less because I wasn't writing as much code. Looking back, I don't think that's true. I was just thinking about different things.
+
+Instead of deciding what to type next, I was deciding whether the implementation made sense. Instead of solving syntax problems, I was evaluating architecture, edge cases, maintainability, and whether the solution actually fit the system it was becoming part of.
+
+The thinking never went away. It simply moved.
+
+Lately, I've started wondering if that's becoming the job.
+
+## The Part I Don't Want to Lose
+
+If I'm honest, I don't really want to spend most of my day writing code anymore.
+
+AI-assisted development has made my work faster, less stressful, and more enjoyable. It helps me avoid getting stuck in low-level implementation details and lets me spend more time thinking about the problems themselves.
+
+I don't miss debugging a missing semicolon or spending hours chasing an implementation detail that an agent can resolve in minutes.
+
+I don't want to go back.
+
+But there is something I worry about losing.
+
+Some of the deepest understanding I've developed throughout my career came from building things myself. There's something about struggling through a problem that forces you to understand it differently.
+
+When an agent handles most of the implementation, it's easier to skip over that struggle.
+
+Will future developers miss that?
+
+Honestly, I don't know.
+
+Maybe some will.
+
+Maybe others will generate code and intentionally spend time understanding why it works, why it was built that way, and whether they agree with it.
+
+Lately I've started wondering if curiosity will matter more than typing.
+
+The people who genuinely want to understand systems will probably always find a way to do it. The tools may change, but that drive doesn't seem like something AI can replace.
+
+## I'm Still Learning What This Means
+
+I don't think software engineering is becoming less valuable.
+
+If anything, it feels like understanding software is becoming more valuable than ever.
+
+The ability to evaluate generated code, recognize subtle problems, question assumptions, and understand how a change fits into a larger system feels more important than knowing the exact syntax to implement it.
+
+That doesn't mean I'm completely comfortable with the shift.
+
+I'm not.
+
+For years, I measured my value by the code I produced.
+
+Lately, I've started wondering if the more valuable skill isn't producing code at all, but understanding it well enough to know when to trust it, when to challenge it, and when to ask for something better.
+
+I don't know if I'll ever stop feeling a little uneasy when I open a pull request for code I didn't personally write.
+
+Maybe that feeling fades with time.
+
+Or maybe it's simply what professional growth feels like when the craft you've practiced for years begins to evolve.
+
+Either way, I have a feeling I'm not the only developer trying to make sense of it.
