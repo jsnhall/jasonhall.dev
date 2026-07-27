@@ -1,0 +1,103 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Jason Hall',
+  date: '2026-07-26',
+  title: 'What Happens When a Platform Grows but the Team Doesn’t?',
+  description:
+    'As a technology platform grows, implicit responsibilities accumulate around the people with the most context unless its ownership model grows too.',
+  category: 'Architecture',
+  tags: ['Platform Engineering', 'Software Engineering', 'Team Structure', 'Ownership'],
+  status: 'published',
+  featured: false,
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+Recently, I started thinking about everything that has to happen around a technology platform before a feature reaches production.
+
+There are requirements to gather, user stories to write, and acceptance criteria to define. Someone has to design the end-user experience. Depending on the platform, there may also be an authoring experience to consider. Then there is development, testing, release preparation, deployment, production validation, backlog refinement, sprint planning, support, and knowledge sharing.
+
+On a small team, it's normal for people to wear several hats. That can even be valuable. Working across disciplines gives you a broader understanding of the platform and how decisions in one area affect another.
+
+But as a platform grows, the work surrounding it grows too.
+
+If the team and its ownership model don't grow with it, those responsibilities don't disappear. They become implicit, and they tend to accumulate around the people with the most context.
+
+I'm starting to think that is one of the clearest signs a platform has outgrown the team responsible for it.
+
+## Growth Is Rarely Only Technical
+
+When organizations invest in a platform, the visible investment is usually technical. New capabilities are added. Integrations are built. More teams begin relying on it, and the platform supports more content, more use cases, and more users.
+
+But every new capability creates work that isn't captured by the implementation alone. Someone has to determine what a feature should do and how it should work for the end user. Someone has to consider the authors managing the content, check that the implementation follows existing patterns, confirm that the finished feature solves the original problem, and coordinate the work against release dates and other dependencies.
+
+A platform can grow technically while ownership of those questions stays where it was. When that happens, the existing team absorbs the difference.
+
+At first, this may look efficient. The work is still getting done, and adding another person always feels more expensive than distributing another responsibility across the current team.
+
+The cost becomes clearer later.
+
+## The Work Still Needs an Owner
+
+Missing ownership rarely looks dramatic at first.
+
+A requirement needs clarification after development begins. An experience decision gets made during implementation. A standard is applied inconsistently because no one has the time or authority to maintain it.
+
+Individually, each situation is manageable, and teams compensate. Backlog refinement catches some of it. Shared components and design systems catch more. Developer judgment closes what's left.
+
+But compensation isn't the same as ownership. Developer judgment can close a gap, but it also means asking developers to make decisions outside their primary role.
+
+Over time, small gaps can turn into inconsistency, rework, and technical debt. Not because the team is incapable, but because the ownership model expects people to cover disciplines without giving them the expertise, authority, or capacity those disciplines require.
+
+## When Multiple Hats Become a Warning
+
+I don't think wearing multiple hats is inherently bad.
+
+Some of the most valuable experience in my career has come from working beyond a narrow job description. Understanding requirements, design, development, testing, and delivery has helped me see connections I might otherwise have missed.
+
+The number of hats may not be the right measure. The warning appears when one person owns several responsibilities that require different expertise, sustained attention, or independent judgment.
+
+If the same person defines the requirement, designs the experience, builds it, and validates it in production, the platform may still move forward. But several useful checks have quietly disappeared.
+The person defining the problem is also the one interpreting it. The person making the design decisions is also the one judging whether the result feels right.
+
+There is continuity in that model, and very little independent perspective.
+
+Context switching adds another cost. Someone can be capable of each kind of work and still lack the time to do all of it well. When several disciplines compete for the same attention, quality tends to suffer first. Delivery speed follows, because ambiguity and rework make each new change harder than the last.
+
+## Artifacts Don't Own Outcomes
+
+A team can have user-story templates, a design system, automated tests, release checklists, and well-defined Scrum ceremonies.
+
+All of that is useful. None of it owns an outcome.
+
+A template cannot make someone investigate an unclear requirement. A design file cannot govern an experience. A test suite cannot decide whether the team built the right thing.
+
+The job titles responsible for this work differ between organizations. A product owner may define priorities and outcomes. A business analyst may translate stakeholder needs into detailed requirements. A project manager may coordinate timelines and dependencies. A Scrum Master may help the team improve its process.
+
+The title matters less than the accountability behind it. Ownership means something when someone has the expertise to do the work, the authority to make decisions, and enough capacity to give it sustained attention. If one of those is missing, assigning ownership on paper probably won't change much.
+
+## The Signals Are Easy to Miss
+
+There probably isn't a single threshold that applies to every platform. Still, I think there are signals.
+
+Questions that should have been settled before development keep surfacing during implementation. Design happens after development has started, or the implementation becomes the design. Standards vary depending on who built a given part of the experience. Technical debt accumulates because specialists rarely have enough uninterrupted attention for their primary craft.
+
+Gradually, one person becomes the connection between most stages of delivery.
+
+That person may be seen as exceptionally valuable, and they probably are. But their ability to keep everything moving can also hide the ownership gaps around them. As long as they keep compensating, the organization may never see the full cost of its current model.
+
+## Where I'm Landing
+
+Leadership has finite budgets. Not every platform can have a dedicated person for every discipline, and adding headcount doesn't automatically produce better work. An internal platform may also lack the commercial pressure that makes experience quality easier to prioritize, and an organization can reasonably decide that other problems are more urgent.
+
+But the work still exists.
+
+Explicit ownership seems like the minimum. As the work becomes sustained and specialized, I think the team has to grow with it. Continuing to distribute new responsibilities across the same people may keep a platform moving for a while, but it doesn't add up to a maintainable ownership model.
+
+A growing platform needs more than additional features and technical capability. Eventually, it needs the expertise, attention, and accountability to match.
