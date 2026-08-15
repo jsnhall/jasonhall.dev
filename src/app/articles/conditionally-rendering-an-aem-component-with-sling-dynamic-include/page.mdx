@@ -1,0 +1,323 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Jason Hall',
+  date: '2026-08-15',
+  title: 'Conditionally Rendering an AEM Component with Sling Dynamic Include',
+  description:
+    'A synthetic resource and renderer bridge let selected AEM component instances use Sling Dynamic Include while other instances remain cached by Dispatcher.',
+  category: 'Architecture',
+  tags: ['AEM', 'Sling Dynamic Include', 'Dispatcher', 'Adobe Experience Manager'],
+  status: 'published',
+  featured: false,
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+[Sling Dynamic Include](https://sling.apache.org/documentation/bundles/dynamic-includes.html) is useful when part of an AEM page must be generated for each request while the rest of the page remains cached by Dispatcher.
+
+Common examples include:
+
+- User-specific navigation
+- Permission-controlled content
+- Account information
+- Notifications
+- Personalized recommendations
+
+Configuring an entire component for Sling Dynamic Include is straightforward. The harder case is when only some instances should be dynamic.
+
+I recently encountered this with a navigation component. Most instances contained the same content for every user and should remain cached. A small number applied user permissions and needed to be rendered dynamically.
+
+The goal was simple:
+
+> Use Sling Dynamic Include only when an author enables permission-based content on the component.
+
+The implementation was less simple than it first appeared.
+
+## Why the entire component should not be dynamic
+
+A normal Dispatcher-cached page is generated once and then reused for subsequent requests. That is ideal for content that is the same for everyone.
+
+Permission-controlled navigation is different. Two users requesting the same page may be allowed to see different menu items.
+
+If the rendered navigation is stored inside the cached page, the first user’s version can potentially be served to other users. The permission logic may work perfectly on AEM Publish and still produce incorrect results through Dispatcher because it is no longer being executed for every request.
+
+This only controls which navigation items are rendered. It does not replace authorization on the underlying pages, resources, or endpoints.
+
+One option was to add the standard navigation resource type to the Sling Dynamic Include configuration. That would render every navigation instance for each request, including instances with no permission-based content. It would prevent personalized navigation from being cached, but it would also give up Dispatcher caching where the navigation was identical for every user.
+
+The better option was to give authors a property such as:
+
+```text
+enablePermissions
+```
+
+When it is disabled, the component renders normally and remains part of the cached page. When it is enabled, only that instance is rendered through Sling Dynamic Include.
+
+## The initial conditional rendering approach
+
+The first implementation divided the component into two paths:
+
+```html
+<sly
+    data-sly-test="${properties.enablePermissions}"
+    data-sly-resource="${resource.path @
+        resourceType='mysite/components/navigation/dynamic'}">
+</sly>
+
+<sly
+    data-sly-test="${!properties.enablePermissions}"
+    data-sly-use.content="content.html"
+    data-sly-call="${content.render}">
+</sly>
+```
+
+The idea was:
+
+1. Check the author-controlled property.
+2. Temporarily render the existing resource as a dynamic component.
+3. Configure that dynamic resource type in Sling Dynamic Include.
+4. Keep normal instances outside Sling Dynamic Include.
+
+The dynamic component then rendered the shared markup:
+
+```html
+<sly
+    data-sly-use.content="/apps/mysite/components/navigation/content.html"
+    data-sly-call="${content.render}">
+</sly>
+```
+
+This appeared to work on AEM Publish, but it failed when the page was processed by Dispatcher.
+
+## Why the temporary resource type failed
+
+The important detail is that Sling Dynamic Include does not finish rendering the component during the original page request.
+
+Instead, it replaces the component output with an SSI directive similar to:
+
+```html
+<!--#include virtual="/content/site/page/.../navigation.nocache.html" -->
+```
+
+Apache processes that directive as an SSI subrequest for the component.
+
+The original implementation temporarily assigned the dynamic resource type to the existing navigation resource:
+
+```text
+resourceType='mysite/components/navigation/dynamic'
+```
+
+That override only existed during the first internal rendering operation. It was not saved on the content resource.
+
+When Dispatcher made the separate `.nocache.html` request, Sling resolved the resource from the repository again. Its persisted resource type was still the standard navigation component.
+
+The request therefore returned to the original component script, saw that permissions were enabled, and attempted to create another dynamic include.
+
+The result was a rendering loop:
+
+```text
+navigation.html
+    → dynamic resource override
+        → SDI include
+            → navigation.html
+                → dynamic resource override
+                    → SDI include
+                        → ...
+```
+
+Depending on the environment, the visible result was either missing content or an Apache message:
+
+```text
+[an error occurred while processing this directive]
+```
+
+## Why adding a query parameter appeared to fix it
+
+During testing, adding a query parameter made the error disappear:
+
+```text
+page.html?v=123
+```
+
+This initially made the problem look like a simple Dispatcher cache issue.
+
+The query parameter did affect caching, but it also changed Sling Dynamic Include’s behavior. By default, SDI skips requests containing non-ignored GET parameters. The `ignoreUrlParams` and `disableIgnoreUrlParams` settings can change that behavior. In this case, SDI did not generate its include directive, so the component rendered directly and the failing `.nocache.html` subrequest never occurred.
+
+The query parameter did not fix the implementation. It bypassed the path that exposed the problem.
+
+This became a useful diagnostic clue: the component itself could render, but the separate SDI request was failing.
+
+## Using a synthetic resource
+
+The solution was to give Sling Dynamic Include a separate synthetic child resource instead of temporarily changing the type of the existing navigation resource.
+
+The conditional routing became:
+
+```html
+<sly
+    data-sly-test="${properties.enablePermissions}"
+    data-sly-resource="${'dynamic' @
+        resourceType='mysite/components/navigation/dynamic'}">
+</sly>
+
+<sly
+    data-sly-test="${!properties.enablePermissions}"
+    data-sly-use.content="content.html"
+    data-sly-call="${content.render}">
+</sly>
+```
+
+The difference is small but important.
+
+The failing version used the current resource path:
+
+```text
+${resource.path @ resourceType='.../dynamic'}
+```
+
+The corrected version creates a synthetic child named `dynamic`:
+
+```text
+${'dynamic' @ resourceType='.../dynamic'}
+```
+
+Conceptually, the component now looks like this during rendering:
+
+```text
+navigation
+└── dynamic
+```
+
+The `dynamic` child does not need to exist in the repository. Sling creates it for the rendering operation. The synthetic child name should be reserved so it cannot collide with a persisted child resource.
+
+Sling Dynamic Include recognizes that it is synthetic and carries its resource type in the generated URL:
+
+```text
+.../navigation/dynamic.nocache.html/mysite/components/navigation/dynamic.html
+```
+
+When Dispatcher makes the second request, SDI can reconstruct the synthetic resource with the correct dynamic resource type. The type is no longer lost between requests.
+
+## The synthetic resource creates another challenge
+
+The synthetic child gives Dispatcher a stable dynamic endpoint, but it does not contain the navigation component’s authored properties or child items.
+
+Those still belong to the parent resource:
+
+```text
+navigation
+├── enablePermissions
+├── permissionListPath
+├── item1
+├── item2
+└── dynamic
+```
+
+If `dynamic.html` rendered the shared content directly, the Sling Models would adapt from the synthetic child. They would not see the real navigation properties or items.
+
+The dynamic script therefore needs to return to the real parent resource:
+
+```html
+<sly
+    data-sly-resource="${resource.parent.path @
+        resourceType='mysite/components/navigation/renderer'}">
+</sly>
+```
+
+This introduces a small renderer component whose only responsibility is to invoke the shared markup:
+
+```html
+<sly
+    data-sly-use.content="/apps/mysite/components/navigation/content.html"
+    data-sly-call="${content.render}">
+</sly>
+```
+
+The renderer uses the real parent resource, so the models can access the authored properties and child items.
+
+## Why the renderer is necessary
+
+It might seem simpler for `dynamic.html` to render the parent using its normal resource type.
+
+That would re-enter the original routing script:
+
+```text
+navigation.html
+```
+
+Because the permission property is still enabled, the routing script would create another synthetic dynamic child and restart the process.
+
+The renderer provides a non-routing path to the shared markup.
+
+The final flow is:
+
+```text
+navigation.html
+    → checks enablePermissions
+        → creates synthetic dynamic child
+            → SDI generates a nocache request
+                → dynamic.html selects the real parent
+                    → renderer.html
+                        → content.html
+```
+
+Each file has one job:
+
+- `navigation.html` decides whether special handling is needed.
+- `dynamic` gives Dispatcher a stable address for dynamic rendering.
+- `renderer` prints the real component without restarting that process.
+- `content.html` contains the markup shared by the cached and dynamic paths.
+
+## Sling Dynamic Include configuration
+
+This assumes Apache is configured to process SSI and Dispatcher is configured to allow `.nocache.html` requests without caching them. The SDI selector marks the subrequest; Dispatcher rules determine whether that response is cached. Adobe’s [AEM SDI setup guide](https://experienceleague.adobe.com/en/docs/experience-manager-learn/foundation/development/set-up-sling-dynamic-include) covers the required Apache and Dispatcher configuration.
+
+Only the synthetic dynamic resource type is added to the SDI configuration:
+
+```json
+{
+    "include-filter.config.enabled": true,
+    "include-filter.config.extension": "html",
+    "include-filter.config.selector": "nocache",
+    "include-filter.config.resource-types": [
+        "mysite/components/navigation/dynamic"
+    ],
+    "include-filter.config.rewrite": true,
+    "include-filter.config.path": "/content"
+}
+```
+
+The standard component and renderer are intentionally excluded.
+
+If the standard component were included, every instance would become dynamic. If the renderer were included, it could generate another include instead of completing the rendering process.
+
+The `nocache` selector identifies the SDI subrequest. Dispatcher must also be configured to exclude requests containing that selector from its cache.
+
+## The broader lesson
+
+Conditional Sling Dynamic Include is not merely a matter of placing a property check around `data-sly-resource`.
+
+The dynamic resource must survive two different rendering contexts:
+
+1. The original page request
+2. The separate request generated by Dispatcher
+
+A temporary resource-type override may work during the first request but disappear during the second. A synthetic resource solves that identity problem by giving SDI enough information to reconstruct the dynamic component.
+
+The renderer bridge then reconnects the synthetic endpoint to the real authored resource without restarting the routing logic.
+
+The result preserves the advantages of both approaches:
+
+- Standard component instances remain cached.
+- Permission-controlled instances are generated for each request.
+- Authors control the behavior with a familiar checkbox.
+- The main markup remains in one shared template.
+- No custom Java filter or request-state logic is required.
+
+It takes a few more files than the initial implementation, but each one has a clear responsibility—and the behavior remains predictable across AEM Publish, Sling Dynamic Include, Apache SSI, and Dispatcher.
